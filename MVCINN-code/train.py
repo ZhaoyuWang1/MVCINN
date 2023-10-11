@@ -50,7 +50,7 @@ def main(model_name,N_EPOCHS=100,LR = 0.0001,depth=12,head=9):
     model = create.my_MVCINN(
         pretrained=True,
         num_classes=5,
-        pre_Path = 'weights/final_0.8010.pth',
+        pre_Path = '/root/autodl-fs/MVCINN/MVCINN-code/weights/final_0.8010.pth',
         depth=depth,
         num_heads=head,
         # embed_dim=768,
@@ -200,9 +200,9 @@ def val_model(model, valid_loader, criterion, device):
 if __name__ == '__main__':
     seed_everything(1001)
     # general global variables
-    DATA_PATH = "../EYData_BaseEye_newdata/"
-    TRAIN_PATH = "../EYData_BaseEye_newdata/train/rgb"
-    TEST_PATH = "../EYData_BaseEye_newdata/test/rgb"
+    DATA_PATH = "/root/autodl-fs/MFIDDR"
+    TRAIN_PATH = "/root/autodl-fs/MFIDDR/train"
+    TEST_PATH = "/root/autodl-fs/MFIDDR/test"
     SAVE_IMG_DIR = 'imgs'
     SAVE_PT_DIR = 'weights'
     NUM_VIEW = 1
@@ -212,9 +212,9 @@ if __name__ == '__main__':
     DEPTH = 12
     HEAD = 9
     BATCH_SIZE = 8
-    train_csv_path = os.path.join(DATA_PATH, 'train_rgb_label_newname.csv')
+    train_csv_path = os.path.join(DATA_PATH, 'train_newname.csv')
     assert os.path.exists(train_csv_path), '{} path is not exists...'.format(train_csv_path)
-    test_csv_path = os.path.join(DATA_PATH, 'test_rgb_label_newname.csv')
+    test_csv_path = os.path.join(DATA_PATH, 'test_newname.csv')
     test_df = pd.read_csv(test_csv_path)
 
     all_data = pd.read_csv(train_csv_path)
