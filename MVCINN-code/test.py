@@ -189,11 +189,11 @@ if __name__ == '__main__':
         # transform.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
     ])
 
-    DATA_PATH = "../EYData_BaseEye_newdata/"
+    DATA_PATH = "/root/autodl-fs/MFIDDR"
 
-    TEST_PATH = "../EYData_BaseEye_newdata/test/rgb/"
+    TEST_PATH = "/root/autodl-fs/MFIDDR/test"
     BATCH_SIZE = 1
-    MODELPATH = "weights/final_0.8010.pth"
+    MODELPATH = "/root/autodl-fs/MVCINN/MVCINN-code/weights/main_1e-05_50_d12_h9-0.7945.pth"
     checkpoint = torch.load(MODELPATH)
     if isinstance(checkpoint, dict):
         model = create.my_MVCINN(
@@ -210,7 +210,7 @@ if __name__ == '__main__':
         )
     else:
         model = checkpoint
-    test_csv_path = os.path.join(DATA_PATH, 'test_rgb_label_newname.csv')
+    test_csv_path = os.path.join(DATA_PATH, 'test_newname.csv')
     test_df = pd.read_csv(test_csv_path)
     test_dataset = MultiviewImgDataset(TEST_PATH, test_df, transform=transform_test)
 
