@@ -100,7 +100,7 @@ def test_model2(netname, model, test_loader, dataset_size, criterion, device):
                   '3': outputs_softmax[batch_i][3],
                   '4': outputs_softmax[batch_i][4]
                   }
-        roc_matrix = roc_matrix.append(roc_df, ignore_index=True)
+        roc_matrix = roc_matrix._append(roc_df, ignore_index=True)
 
         # fusion matrix
         predict_label = preds[batch_i]
