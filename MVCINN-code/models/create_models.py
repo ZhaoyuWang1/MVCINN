@@ -24,7 +24,7 @@ def my_MVCINN(pretrained=False,depth=12,num_heads=9, **kwargs):
                 checkpoint_model = checkpoint
             
             load_dict = {k:v for k,v in checkpoint_model.items() if k in state_dict.keys()}
-            if kwargs['num_classes']!=1000 and pre_Path=='weights/Conformer_base_patch16.pth':
+            if kwargs['num_classes']!=1000 and pre_Path=='/root/autodl-fs/MVCINN/MVCINN-code/weights/Conformer_base_patch16.pth':
                 load_dict.pop('trans_cls_head.weight')
                 load_dict.pop('trans_cls_head.bias')
                 load_dict.pop('conv_cls_head.weight')
