@@ -471,7 +471,7 @@ class MVCINN(nn.Module):
         t_vis_=torch.einsum('bvschw->bvshw', t_vis_)
         x = rearrange(x,'(b v) c h w -> b v c h w',v=4)
         x_t = rearrange(x_t,'(b v) c e -> b v c e',v=4)
-
+        print(f"x_t shape after extraction {x_t.shape}")
         t_vis = torch.ones([b, 4, 224, 224])
         for i in range(14):
             for j in range(14):
