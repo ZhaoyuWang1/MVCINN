@@ -444,35 +444,35 @@ class MVCINN(nn.Module):
         B = x.shape[0]
         b = B//self.num_view
         cls_tokens = self.cls_token.expand(B, -1, -1)
-        print(f"cls_token size is {cls_tokens.shape}")
+        #print(f"cls_token size is {cls_tokens.shape}")
         # print(cls_tokens.shape)
         # pdb.set_trace()
         # stem stage [N, 3, 224, 224] -> [N, 64, 56, 56]
-        print(f"x shape is {x.shape}")
+        #print(f"x shape is {x.shape}")
         x_base = self.maxpool(self.act1(self.bn1(self.conv1(x)))) # [N, 64, 56, 56]
         # x_base = self.joint(x_base)
         # 1 stage
-        print(f"x_base shape is {x_base.shape}")
+        #print(f"x_base shape is {x_base.shape}")
         x = self.conv_1(x_base, return_x_2=False)
-        print(f"x shape {x.shape}")
+        #print(f"x shape {x.shape}")
         x_t = self.trans_patch_conv(x_base) # [B*4, 576, 14, 14]
 
         x_t = x_t.flatten(2).transpose(1, 2) # [B*4, 196, 576]
 
         x_t = torch.cat([cls_tokens, x_t], dim=1)
-        print(f"x_t with token shape {x_t.shape}")
+        #print(f"x_t with token shape {x_t.shape}")
         x_t = self.trans_1(x_t)
-        print(f"x_t output of transblock shape {x_t.shape}")
+        #print(f"x_t output of transblock shape {x_t.shape}")
         # 2 ~ final 
         for i in range(2, self.fin_stage):
             x, x_t = eval('self.conv_trans_' + str(i))(x, x_t)
-            print(f"x shape {x.shape}")
+            #print(f"x shape {x.shape}")
         ## x[32,768,28,28] x_t[32,197,576]
         t_vis_ = F.interpolate(x_t, size=768, mode='nearest').view(b, 4, 197, 3, 16, 16)  # [N, 197, 768]
         t_vis_=torch.einsum('bvschw->bvshw', t_vis_)
         x = rearrange(x,'(b v) c h w -> b v c h w',v=4)
         x_t = rearrange(x_t,'(b v) c e -> b v c e',v=4)
-        print(f"x_t shape after extraction {x_t.shape}")
+        #print(f"x_t shape after extraction {x_t.shape}")
         t_vis = torch.ones([b, 4, 224, 224])
         for i in range(14):
             for j in range(14):
