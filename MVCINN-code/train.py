@@ -208,7 +208,7 @@ if __name__ == '__main__':
     NUM_VIEW = 1
     IMAGE_SIZE = 224
     LR = 0.00001
-    N_EPOCHS = 50
+    N_EPOCHS = 100 #50
     DEPTH = 12
     HEAD = 9
     BATCH_SIZE = 8
