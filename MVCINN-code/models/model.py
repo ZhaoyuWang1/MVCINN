@@ -446,10 +446,11 @@ class MVCINN(nn.Module):
         # print(cls_tokens.shape)
         # pdb.set_trace()
         # stem stage [N, 3, 224, 224] -> [N, 64, 56, 56]
+        print(f"x shape is {x.shape}")
         x_base = self.maxpool(self.act1(self.bn1(self.conv1(x)))) # [N, 64, 56, 56]
         # x_base = self.joint(x_base)
         # 1 stage
-        #print(f"x_base shape is {x_base.shape}")
+        print(f"x_base shape is {x_base.shape}")
         x = self.conv_1(x_base, return_x_2=False)
 
         x_t = self.trans_patch_conv(x_base) # [B*4, 576, 14, 14]
