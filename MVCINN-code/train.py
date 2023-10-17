@@ -93,7 +93,7 @@ def main(model_name,N_EPOCHS=100,LR = 0.0001,depth=12,head=9):
             label = label.to(device, non_blocking=True)
 
             B, V, C, H, W = img.size()
-            print(f"data size is {img.shape}")
+            print(f"data is {img}")
             # mixup
             alpha=0.2
             lam = np.random.beta(alpha,alpha)
@@ -103,6 +103,7 @@ def main(model_name,N_EPOCHS=100,LR = 0.0001,depth=12,head=9):
             
 
             imgs_mix = imgs_mix.view(-1, C, H, W)
+            print(f"input data is {imgs_mix}")
 
             # b,v = label.shape
             # label=label.view(b*v)
