@@ -454,7 +454,7 @@ class MVCINN(nn.Module):
         # 1 stage
         print(f"x_base shape is {x_base.shape}")
         x = self.conv_1(x_base, return_x_2=False)
-
+        print(f"x shape {x.shape}")
         x_t = self.trans_patch_conv(x_base) # [B*4, 576, 14, 14]
 
         x_t = x_t.flatten(2).transpose(1, 2) # [B*4, 196, 576]
@@ -466,6 +466,7 @@ class MVCINN(nn.Module):
         # 2 ~ final 
         for i in range(2, self.fin_stage):
             x, x_t = eval('self.conv_trans_' + str(i))(x, x_t)
+            print(f"x shape {x.shape}")
         ## x[32,768,28,28] x_t[32,197,576]
         t_vis_ = F.interpolate(x_t, size=768, mode='nearest').view(b, 4, 197, 3, 16, 16)  # [N, 197, 768]
         t_vis_=torch.einsum('bvschw->bvshw', t_vis_)
