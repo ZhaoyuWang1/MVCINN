@@ -315,6 +315,7 @@ class MVCINN(nn.Module):
         assert depth % 3 == 0
         self.num_view = 4
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
+        print(f"initiate token shape {self.cls_token.shape}")
         self.trans_dpr = [x.item() for x in torch.linspace(0, drop_path_rate, depth)]  # stochastic depth decay rule
 
         # Classifier head
@@ -443,6 +444,7 @@ class MVCINN(nn.Module):
         B = x.shape[0]
         b = B//self.num_view
         cls_tokens = self.cls_token.expand(B, -1, -1)
+        print(f"cls_token size is {cls_tokens.shape}")
         # print(cls_tokens.shape)
         # pdb.set_trace()
         # stem stage [N, 3, 224, 224] -> [N, 64, 56, 56]
@@ -458,9 +460,9 @@ class MVCINN(nn.Module):
         x_t = x_t.flatten(2).transpose(1, 2) # [B*4, 196, 576]
 
         x_t = torch.cat([cls_tokens, x_t], dim=1)
-        
+        print(f"x_t with token shape {x_t.shape}")
         x_t = self.trans_1(x_t)
-        
+        print(f"x_t output of transblock shape {x_t.shape}")
         # 2 ~ final 
         for i in range(2, self.fin_stage):
             x, x_t = eval('self.conv_trans_' + str(i))(x, x_t)
