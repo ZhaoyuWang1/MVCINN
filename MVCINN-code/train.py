@@ -50,7 +50,7 @@ def main(model_name,N_EPOCHS=100,LR = 0.0001,depth=12,head=9):
     model = create.my_MVCINN(
         pretrained=True,
         num_classes=5,
-        pre_Path = '/root/autodl-fs/MVCINN/MVCINN-code/weights/main_1e-05_50_d12_h9-0.7555.pth', #'/root/autodl-fs/MVCINN/MVCINN-code/weights/Conformer_base_patch16.pth',
+        pre_Path = '/root/autodl-fs/MVCINN/MVCINN-code/weights/Conformer_base_patch16.pth', #'/root/autodl-fs/MVCINN/MVCINN-code/weights/main_1e-05_50_d12_h9-0.7555.pth', 
         depth=depth,
         num_heads=head,
         # embed_dim=768,
