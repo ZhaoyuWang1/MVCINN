@@ -193,7 +193,7 @@ if __name__ == '__main__':
 
     TEST_PATH = "/root/autodl-fs/MFIDDR/test"
     BATCH_SIZE = 1
-    MODELPATH = "/root/autodl-fs/MVCINN/MVCINN-code/weights/main_1e-05_50_d12_h9-0.7945.pth"
+    MODELPATH = "/root/autodl-fs/MVCINN/MVCINN-code/weights/main_1e-05_100_d12_h9-0.7848.pth"
     checkpoint = torch.load(MODELPATH)
     if isinstance(checkpoint, dict):
         model = create.my_MVCINN(
